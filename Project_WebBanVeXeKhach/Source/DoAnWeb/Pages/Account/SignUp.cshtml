@@ -1,0 +1,97 @@
+﻿@page
+@model SignUpModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null;
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Login 07</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="~/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/css_latin.css">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+    <!-- Thêm một vùng chứa để hiển thị thông báo -->
+    <div class="container">
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-info">@TempData["Message"]</div>
+        }
+    </div>
+    <section class="ftco-section">
+            <div class="container">
+            <div class="row justify-content-center">
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-12 col-lg-10">
+                    <div class="wrap d-md-flex">
+                        <div class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center order-md-last">
+                            <div class="text w-100">
+                                <h2>Welcome to login</h2>
+                                <p>You have an account?</p>
+                                <a href="login" class="btn btn-white btn-outline-white">Sign In</a>
+                            </div>
+                        </div>
+                        <div class="login-wrap p-4 p-lg-5">
+                            <div class="d-flex">
+                                <div class="w-100">
+                                    <h3 class="mb-4">Sign Up</h3>
+                                </div>
+                                <div class="w-100">
+                                    <p class="social-media d-flex justify-content-end">
+                                        <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
+                                        <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
+                                    </p>
+                                </div>
+                            </div>
+                            <form method="post" class="signin-form">
+                                <div class="form-group mb-3">
+                                    <label class="label" for="name">Tài Khoản</label>
+                                    <input asp-for="tendangnhap" type="text" class="form-control" placeholder="Username" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="label" for="password">Mật Khẩu</label>
+                                    <input asp-for="matkhau" type="password" class="form-control" id="password" placeholder="Password" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="label" for="confirmPassword">Xác nhận lại mật khẩu</label>
+                                    <input type="password" class="form-control" id="confirmPassword" placeholder="Password" required>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="form-control btn btn-primary submit px-3">Đăng Ký Ngay</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/popper.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/main.js"></script>
+    <script src="~/js/jquery1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.signin-form').submit(function (e) {
+                // Lấy giá trị của mật khẩu và xác nhận mật khẩu từ các trường input
+                var password = $('#password').val();
+                var confirmPassword = $('#confirmPassword').val();
+
+                // Kiểm tra xem mật khẩu và xác nhận mật khẩu có khớp nhau không
+                if (password !== confirmPassword) {
+                    // Nếu không khớp, hiển thị thông báo và ngăn form submit
+                    alert('Mật khẩu và xác nhận mật khẩu không khớp.');
+                    e.preventDefault(); // Ngăn form submit nếu mật khẩu không khớp
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

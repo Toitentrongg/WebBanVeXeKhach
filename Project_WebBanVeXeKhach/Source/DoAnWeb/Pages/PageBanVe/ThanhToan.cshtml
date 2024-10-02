@@ -1,0 +1,134 @@
+﻿@page
+@model DoAnWeb.Pages.PageBanVe.ThanhToanModel
+@{
+}
+<!DOCTYPE html>
+<html lang="vi" class="h-100">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Nền tảng - Kiến thức cơ bản về WEB | Bảng tin</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/css/bootstrapTT.min.css" type="text/css">
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="../vendor/font-awesome/css/font-awesome.min.css" type="text/css">
+
+    <!-- Custom css - Các file css do chúng ta tự viết -->
+    <link rel="stylesheet" href="../assets/css/app.css" type="text/css">
+</head>
+    
+<body>
+    <main role="main">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="container mt-4">
+                <form class="needs-validation" name="frmthanhtoan" action="/Home/CreatePaymentUrl" id="frmCreateOrder" method="post"
+                      action="#">
+                    <input type="hidden" name="kh_tendangnhap" value="dnpcuong">
+
+                    <div class="py-5 text-center">
+                        <i class="fa fa-credit-card fa-4x" aria-hidden="true"></i>
+                        <h2>Thanh toán</h2>
+                        <p class="lead">Vui lòng kiểm tra thông tin Khách hàng, thông tin Giỏ hàng trước khi Đặt hàng.</p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 order-md-2 mb-4">
+                            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="text-muted">Giỏ hàng</span>
+                            </h4>
+                            <ul class="list-group mb-3">
+
+                                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                    <div>
+                                        <h6 class="my-0">Vé @Model._service.GheDangChon</h6>
+                                    </div>
+                                    <span class="text-muted">@Model._service.GiaVeTT</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>Tổng thành tiền</span>
+                                    <strong>@Model._service.GiaVeTT</strong>
+                                </li>
+                            </ul>
+
+
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Mã khuyến mãi">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-secondary">Xác nhận</button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-8 order-md-1">
+                            <h4 class="mb-3">Thông tin khách hàng</h4>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="kh_dienthoai">Người Mua :</label>
+                                    <input type="text" class="form-control" name="user" id="user"
+                                           value="@User.Identity.Name" readonly="">
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="kh_ten">Chuyến xe : </label>
+                                    <input type="text" class="form-control" name="MaCX" id="MaCX"
+                                           value="@Model._service.MaChuyen" readonly="">
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="kh_gioitinh">Điểm Bắt Đầu</label>
+                                    <input type="text" class="form-control" name="start" id="start" value="@Model._service.Start"
+                                           readonly="">
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="kh_diachi">Điểm Kết Thúc</label>
+                                    <input type="text" class="form-control" name="end" id="end"
+                                           value="@Model._service.End" readonly="">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label for="kh_email">Thời Gian Xuất Phát :</label>
+                                    <input type="text" class="form-control" name="time" id="time"
+                                           value="@Model._service.Departure" readonly="">
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="kh_cmnd">Giá Vé Của 1 Ghế</label>
+                                    <input type="text" class="form-control" name="Gia" id="Gia" value="@Model._service.GiaVe"
+                                           readonly="">
+                                </div>
+                            </div>
+
+                            <h4 class="mb-3">Hình thức thanh toán</h4>
+
+                            <div class="d-block my-3">
+                                <div class="custom-control custom-radio">
+                                    <input id="httt-1" name="httt_ma" type="radio" class="custom-control-input" required=""
+                                           value="1">
+                                    <label class="custom-control-label" for="httt-1">Tiền mặt</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input id="httt-2" name="httt_ma" type="radio" class="custom-control-input" required=""
+                                           value="2">
+                                    <label class="custom-control-label" for="httt-2">Chuyển khoản</label>
+                                </div>
+                            </div>
+                            <hr class="mb-4">
+                            <button style="margin:10px;" class="btn btn-primary btn-lg btn-block" type="submit" name="btnDatHang">
+                                Đặt
+                                Vé
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        }
+        else
+        {
+            Response.Redirect("/Account/Login");
+        }
+    </main>
+</body>
+
+</html>

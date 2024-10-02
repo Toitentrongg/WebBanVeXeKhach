@@ -1,0 +1,118 @@
+﻿@page
+@model DoAnWeb.Pages.InfoUserModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="description" content="POS - Bootstrap Admin Template">
+    <meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, invoice, html5, responsive, Projects">
+    <meta name="author" content="Dreamguys - Bootstrap Admin Template">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.jpg">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        /* Add your custom styles here */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>Quản Lý Giá Vé</h4>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        @if (Model.Chucnang == "edit")
+                        {
+                            <form method="post" asp-page-handler="OnPost">
+                            <tbody>
+                                <tr>
+                                    <th>Tên Đăng Nhập</th>
+                                    <td>@Model.userr.TenDangNhap</td>
+                                </tr>
+                                <tr>
+                                    <th>Mật Khẩu</th>
+                                    <td><input type="text" class="form-control" asp-for="userr.MatKhau" /></td>
+                                </tr>
+                                <tr>
+                                    <th>Quyền Hạn</th>
+                                    <td>@Model.userr.QuyenHan</td>
+                                </tr>
+                                <tr>
+                                    <th>Tên Người Dùng</th>
+                                    <td><input type="text" class="form-control" asp-for="userr.TenUser" value="@Model.userr.TenUser" /></td>
+                                </tr>
+                                <tr>
+                                    <th>Địa Chỉ</th>
+                                    <td><input type="text" class="form-control" asp-for="userr.DiaChi" value="@Model.userr.DiaChi" /></td>
+                                </tr>
+                                <tr>
+                                    <th>Số Điện Thoại</th>
+                                    <td><input type="text" class="form-control" asp-for="userr.SoDT" value="@Model.userr.SoDT" /></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><button type="submit" class="btn btn-primary">Lưu thay đổi</button></td>
+                                </tr>
+                            </tbody>
+                            </form>
+                        }
+                        else
+                        {
+                            <tbody>
+                                <tr>
+                                    <th>Tên Đăng Nhập</th>
+                                    <td>@Model.userr.TenDangNhap</td>
+                                </tr>
+                                <tr>
+                                    <th>Mật Khẩu</th>
+                                    <td>@Model.userr.MatKhau</td>
+                                </tr>
+                                <tr>
+                                    <th>Quyền Hạn</th>
+                                    <td>@Model.userr.QuyenHan</td>
+                                </tr>
+                                <tr>
+                                    <th>Tên Người Dùng</th>
+                                    <td>@Model.userr.TenUser</td>
+                                </tr>
+                                <tr>
+                                    <th>Địa Chỉ</th>
+                                    <td>@Model.userr.DiaChi</td>
+                                </tr>
+                                <tr>
+                                    <th>Số Điện Thoại</th>
+                                    <td>@Model.userr.SoDT</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <a class="btn border border-dark" href="InfoUser?chucnang=edit">
+                                            <img src="~/assets//img/icons/edit-5.svg" alt="img">
+                                            Chỉnh sửa thông tin
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        // Your JavaScript code here
+    </script>
+</body>
+</html>

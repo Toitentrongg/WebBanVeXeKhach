@@ -1,0 +1,214 @@
+﻿@page
+@model DoAnWeb.Pages.PageBanVe.ChonGheModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Flight - Contact Page</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/css/banve/style.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        /* CSS để tạo khoảng cách giữa các ô */
+        td {
+            padding: 20px; /* Thêm padding để tạo khoảng cách bên trong ô */
+        }
+
+        #BtnMuaVe {
+            border-radius: 10px; /* Đặt viền tròn */
+            transition: background-color 0.3s; /* Hiệu ứng màu nền */
+        }
+            #BtnMuaVe:hover {
+                background-color: #28a745; /* Màu xanh khi di chuột vào */
+            }
+    </style>
+
+</head>
+<body style="background-image: url('~/wwwroot/img/bg-texture-light.jpg'); background-size: cover; background-repeat: no-repeat;">
+    <div class="container">
+        <div class="p-3 m-3">
+            <div class="row">
+                <div class="col-3">
+                    <p style="font-size:x-large"><b>Chú Thích: </b></p>
+                    <br />
+                    <p style="font-size:x-large">
+                        <img src="~/img/pic/XeKhachDaBan.png" />
+                        : Ghế không bán
+                    </p>
+                    <br />
+                    <p style="font-size:x-large">
+                        <img src="~/img/pic/XeKhachChon.png" />
+                        : Ghế Đang chọn
+                    </p>
+                    <br />
+                    <p style="font-size:x-large">
+                        <img src="~/img/pic/XeKhachChuaChon.png" />
+                        : Ghế Chưa chọn
+                    </p>
+                </div>
+
+                <div class="col-3">
+                    <div class="h3">Tầng Dưới</div>
+                    <table style="background-color:whitesmoke; border-radius: 20px;" id="tangDuoi">
+                        <tr>
+                            <td class="seat">
+                                <img src="~/img/pic/BacTai.png" />
+                            </td>
+                        </tr>
+                        @for (int i = 0; i < Model._service.lstxedaban.Count / 2; i += 2)
+                        {
+                            <tr>
+                                @if (Model._service.lstxedaban[i] == false)
+                                {
+                                    <td name="@(i+1)" class="seat">
+                                        <img src="~/img/pic/XeKhachChuaChon.png" />
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td name="@(i+1)" class="seat">
+                                        <img src="~/img/pic/XeKhachDaBan.png" />
+                                    </td>
+                                }
+
+                                @if (i + 1 < Model._service.lstxedaban.Count && i + 1 < 15)
+                                {
+                                    @if (Model._service.lstxedaban[i + 1] == false)
+                                    {
+                                        <td name="@(i+2)" class="seat">
+                                            <img src="~/img/pic/XeKhachChuaChon.png" />
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td name="@(i+2)" class="seat">
+                                            <img src="~/img/pic/XeKhachDaBan.png" />
+                                        </td>
+                                    }
+                                }
+                            </tr>
+                        }
+                    </table>
+                </div>
+                <div class="col-3">
+                    <div class="h3">Tầng Trên</div>
+                    <table style="background-color:whitesmoke; border-radius: 20px;" id="tangTren">
+                        <tr>
+                            <td>
+                                <br /><br />
+                            </td>
+                        </tr>
+                        @for (int i = Model._service.lstxedaban.Count / 2; i < Model._service.lstxedaban.Count && i < Model._service.lstxedaban.Count / 2 + 15; i += 2)
+                        {
+                            <tr>
+                                @if (Model._service.lstxedaban[i] == false)
+                                {
+                                    <td name="@(i+1)" class="seat">
+                                        <img src="~/img/pic/XeKhachChuaChon.png" />
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td name="@(i+1)" class="seat">
+                                        <img src="~/img/pic/XeKhachDaBan.png" />
+                                    </td>
+                                }
+
+                                @if (i + 1 < Model._service.lstxedaban.Count && i + 1 < Model._service.lstxedaban.Count / 2 + 15)
+                                {
+                                    @if (Model._service.lstxedaban[i + 1] == false)
+                                    {
+                                        <td name="@(i+2)" class="seat">
+                                            <img src="~/img/pic/XeKhachChuaChon.png" />
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td name="@(i+2)" class="seat">
+                                            <img src="~/img/pic/XeKhachDaBan.png" />
+                                        </td>
+                                    }
+                                }
+                            </tr>
+                        }
+                    </table>
+                    <br />
+                    <br />
+                </div>
+                <div class="col-3">
+                    <br />
+                    <p style="font-size:x-large" id="selectedSeats">
+                        Ghế Đang chọn
+                    </p>
+                    <br />
+                    <p style="font-size:x-large" id="ticketPrice">
+                        Giá Vé :
+                    </p>
+                    <br />
+                    <form method="post">
+                        <input asp-for="GheDangChon" type="hidden" id="GheDangChon" value="">
+                        <button style="font-size:x-large" id="BtnMuaVe" style="width:250px;height:50px" type="submit" class="btn btn-outline-primary btn-rounded">Mua Vé Ngay</button>
+                        <input asp-for="ticketPriceInput" type="hidden" id="ticketPriceInput" value="">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Mảng chứa các ghế đang chọn
+            var selectedSeats = [];
+
+            // Bắt sự kiện click vào ô (td) có class "seat"
+            $(".seat").click(function () {
+                // Lấy tên của ghế (name của td)
+                var seatName = $(this).attr("name");
+
+                // Lấy src của ảnh trong ô đó
+                var imgSrc = $(this).find("img").attr("src");
+
+                // Kiểm tra nếu ảnh là XeKhachChuaChon.png thì đổi thành XeKhachChon.png, ngược lại đổi ngược lại
+                if (imgSrc.includes("XeKhachChuaChon.png")) {
+                    $(this).find("img").attr("src", "/img/pic/XeKhachChon.png");
+                    selectedSeats.push(seatName); // Thêm ghế vào danh sách các ghế đang chọn
+                } else if (imgSrc.includes("XeKhachChon.png")) {
+                    $(this).find("img").attr("src", "/img/pic/XeKhachChuaChon.png");
+                    var index = selectedSeats.indexOf(seatName);
+                    if (index !== -1) {
+                        selectedSeats.splice(index, 1); // Xóa ghế khỏi danh sách các ghế đang chọn
+                    }
+                }
+
+                // Cập nhật thông tin Ghế Đang Chọn và Giá Vé
+                updateSelectedSeatsInfo();
+            });
+
+            // Hàm cập nhật thông tin Ghế Đang Chọn và Giá Vé
+            function updateSelectedSeatsInfo() {
+                var selectedSeatsInfo = "";
+                for (var i = 0; i < selectedSeats.length; i++) {
+                    selectedSeatsInfo += selectedSeats[i];
+                    if (i < selectedSeats.length - 1) {
+                        selectedSeatsInfo += ", ";
+                    }
+                }
+                var ticketPrice = selectedSeats.length * @Model._service.GiaVe;
+
+                // Hiển thị thông tin ghế đang chọn và giá vé
+                $("p#selectedSeats").text("Ghế đang chọn : " + selectedSeatsInfo);
+                $("p#ticketPrice").text("Giá Vé: " + ticketPrice);
+                $("input#ticketPriceInput").val(ticketPrice);
+                $("input#GheDangChon").val(selectedSeatsInfo);
+            }
+        });
+    </script>
+</body>
+</html>

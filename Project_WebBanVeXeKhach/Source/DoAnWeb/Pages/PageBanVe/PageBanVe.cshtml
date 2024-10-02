@@ -1,0 +1,73 @@
+﻿@page
+@model DoAnWeb.Pages.PageBanVe.PageBanVeModel
+@using System.Data
+@using System.Globalization
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Flight - Contact Page</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/css/banve/style.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        /* Thêm CSS cho hiệu ứng border và hover */
+        .thubmnail-recent {
+            border: 1px solid #ccc; /* Kẻ border */
+            padding: 10px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease; /* Tạo hiệu ứng transition cho border */
+            width: 45%; /* Điều chỉnh chiều rộng để vừa hai cột */
+            display: inline-block; /* Hiển thị thẻ theo hàng ngang */
+            margin-right: 2%; /* Thêm khoảng cách giữa các thẻ */
+            vertical-align: top; /* Căn chỉnh thẻ theo phía trên */
+        }
+
+            /* Hiệu ứng hover */
+            .thubmnail-recent:hover {
+                border-color: #007bff; /* Màu border khi hover */
+                box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Tạo bóng khi hover */
+            }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var buttons = document.querySelectorAll(".btn-secondary");
+            buttons.forEach(function (button) {
+                button.addEventListener("click", function () {
+                    var maChuyenXe = this.parentElement.querySelector('input[name="maChuyenXe"]').value;
+                    // Chuyển hướng đến trang chọn ghế với mã chuyến xe làm tham số trong URL
+                    window.location.href = "ChonGhe?maChuyenXe=" + maChuyenXe;
+                });
+            });
+        });
+    </script>
+</head>
+<body background="~/img/bg-texture-light.jpg">
+    <div class="container">
+        <div class="row">
+            <form method="post">
+                @for (int i = 0; i < Model.ChuyenXe.Rows.Count; i++)
+                {
+                    DateTime dateTime = DateTime.ParseExact(@Model.ChuyenXe.Rows[i]["ThoiGianXuatPhat"].ToString(), "M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture);
+                    string formattedDate = dateTime.ToString("dd/MM/yyyy");
+                    <div style="margin:20px" class="col-6 thubmnail-recent">
+                        <img style="width: 200px; height: 200px;" src="~/img/xe1.jpg" class="recent-thumb" alt="">
+                        <h5 class="card-title">Mã Chuyến Xe: @Model.ChuyenXe.Rows[i]["MaChuyenXe"]</h5>
+                        <div class="product-sidebar-price">
+                            <p style="font-size:medium" class="card-text">Nơi Xuất Phát: @Model.ChuyenXe.Rows[i]["DiemBatDau"]</p>
+                            <p style="font-size:medium" class="card-text">Nơi Đến: @Model.ChuyenXe.Rows[i]["DiemKetThuc"]</p>
+                            <p style="font-size:medium" class="card-text">Thời Gian Xuất Phát: @formattedDate</p>
+                            <p style="font-size:medium" class="card-text">Số Vé Còn: @Model.ChuyenXe.Rows[i]["SoVeCon"]</p>
+                        </div>
+                        <input type="hidden" name="maChuyenXe" value="@Model.ChuyenXe.Rows[i]["MaChuyenXe"]" />
+                        <button style="background:#8860D0" type="button" class="btn btn-secondary btn-lg btn-block">Mua vé ngay</button>
+                    </div>
+                }
+            </form>
+        </div>
+    </div>
+    
+</body>
+</html>

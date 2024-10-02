@@ -1,0 +1,130 @@
+﻿@page
+@model DoAnWeb.Areas.Admin.Pages.CEUsersModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "~/Areas/Admin/Pages/Shared/_LayoutAdmin.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="description" content="POS - Bootstrap Admin Template">
+    <meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, invoice, html5, responsive, Projects">
+    <meta name="author" content="Dreamguys - Bootstrap Admin Template">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Dreams Pos admin template</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.jpg">
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="assets/css/animate.css">
+
+    <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
+
+    <link rel="stylesheet" href="assets/css/dataTables.bootstrap4.min.css">
+
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                @if (Model.chucnang == "edit")
+                {
+                    <h4>Sửa thông tin Users</h4>
+                }
+                else
+                {
+                    <h4>Tạo Thêm Users</h4>
+
+                }
+            </div>
+        </div>
+        <form method="post">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @if (Model.chucnang == "edit")
+                                {
+                                    <label for="TenDangNhap">Tên Đăng Nhập  :</label>
+                                    <input type="text" class="form-control" asp-for="TenDangNhap" value="@Model.TenDangNhap" />
+                                }
+                                else
+                                {
+                                    <label for="TenDangNhap">Tên Đăng Nhập  :</label>
+                                    <input type="text" class="form-control" asp-for="TenDangNhap" value="">
+                                }
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="MatKhau">Mật Khẩu</label>
+                                <input type="text" class="form-control" asp-for="MatKhau" value="">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="QuyenHan">Quyền Hạn</label>
+                                <input type="text" class="form-control" asp-for="QuyenHan" value="">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="TenUser">Tên Người Dùng</label>
+                                <input type="text" class="form-control" asp-for="TenUser" value="">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="DiaChi">Địa Chỉ</label>
+                                <input type="text" class="form-control" asp-for="DiaChi" value="">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="SoDT">Số Điện Thoại</label>
+                                <input type="text" class="form-control" asp-for="SoDT" value="">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="SoVeMua">Số Vé Mua</label>
+                                <input type="text" class="form-control" asp-for="SoVeMua" value="">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button asp-page-handler="Edit" type="submit" class="btn btn-primary">Sửa User</button>
+                            <button style="margin:10px;" asp-page-handler="Create" type="submit" class="btn btn-primary">Thêm User</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
+
+    <script src="assets/js/feather.min.js"></script>
+
+    <script src="assets/js/jquery.slimscroll.min.js"></script>
+
+    <script src="assets/js/jquery.dataTables.min.js"></script>
+    <script src="assets/js/dataTables.bootstrap4.min.js"></script>
+
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/plugins/select2/js/select2.min.js"></script>
+
+    <script src="assets/plugins/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="assets/plugins/sweetalert/sweetalerts.min.js"></script>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

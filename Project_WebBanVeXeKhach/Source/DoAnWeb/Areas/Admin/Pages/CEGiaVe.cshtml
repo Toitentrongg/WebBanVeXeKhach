@@ -1,0 +1,83 @@
+﻿@page
+@model DoAnWeb.Areas.Admin.Pages.CEGiaVeModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "~/Areas/Admin/Pages/Shared/_LayoutAdmin.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="description" content="POS - Bootstrap Admin Template">
+    <meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, invoice, html5, responsive, Projects">
+    <meta name="author" content="Dreamguys - Bootstrap Admin Template">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.jpg">
+</head>
+<body>
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                @if (Model.Chucnang == "edit")
+                {
+                    <h4>Sửa Tuyến Xe</h4>
+                }
+                else
+                {
+                    <h4>Tạo Thêm Tuyến Xe</h4>
+
+                }
+            </div>
+        </div>
+        <form method="post">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @if (Model.Chucnang == "edit")
+                                {
+                                    <label for="matuyenxe">Mã Tuyến :</label>
+                                    <input type="text" class="form-control" asp-for="matuyenxe" value="@Model.matuyenxe" readonly>
+                                }
+                                else
+                                {
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="matuyenxe">Mã Tuyến Xe</label>
+                                            <select class="form-select" asp-for="matuyenxe">
+                                                @foreach (var i in Model.MaTuyenList)
+                                                {
+                                                    <option>@i</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="GiaVe">Giá Vé</label>
+                                <input type="text" class="form-control" asp-for="GiaVe" value="">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="NoiDen">Ngày Áp Dụng</label>
+                                <input type="date" class="form-control" asp-for="NgayApDung" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button asp-page-handler="Edit" type="submit" class="btn btn-primary">Sửa Giá Vé</button>
+                            <button style="margin:10px;" asp-page-handler="Create" type="submit" class="btn btn-primary">Thêm Giá Vé</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

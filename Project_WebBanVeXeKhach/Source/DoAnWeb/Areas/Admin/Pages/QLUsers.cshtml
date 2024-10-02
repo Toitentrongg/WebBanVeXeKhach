@@ -1,0 +1,125 @@
+﻿@page
+@model DoAnWeb.Areas.Admin.Pages.QLUsersModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "~/Areas/Admin/Pages/Shared/_LayoutAdmin.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="description" content="POS - Bootstrap Admin Template">
+    <meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, invoice, html5, responsive, Projects">
+    <meta name="author" content="Dreamguys - Bootstrap Admin Template">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.jpg">
+</head>
+<body>
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>Quản Lý Users</h4>
+            </div>
+            <div class="page-btn">
+                <a href="CEUsers?chucnang=Create" class="btn btn-added"><img src="~/assets/img/icons/plus.svg" alt="img" class="me-1">Thêm Người Dùng</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="table-top">
+                    <div class="search-set">
+                        <div class="search-path">
+                            <a class="btn btn-filter" id="filter_search">
+                                <img src="~/assets/img/icons/filter.svg" alt="img">
+                                <span><img src="~/assets/img/icons/closes.svg" alt="img"></span>
+                            </a>
+                        </div>
+                        <div class="search-input">
+                            <a class="btn btn-searchset"><img src="~/assets/img/icons/search-white.svg" alt="img"></a>
+                        </div>
+                    </div>
+                    <div class="wordset">
+                        <ul>
+                            <li>
+                                <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img src="~/assets/img/icons/pdf.svg" alt="img"></a>
+                            </li>
+                            <li>
+                                <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img src="~/assets/img/icons/excel.svg" alt="img"></a>
+                            </li>
+                            <li>
+                                <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img src="~/assets/img/icons/printer.svg" alt="img"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table  datanew">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <label class="checkboxs">
+                                        <input type="checkbox" id="select-all">
+                                        <span class="checkmarks"></span>
+                                    </label>
+                                </th>
+                                <th>Tên Đăng Nhập</th>
+                                <th>Mật Khẩu</th>
+                                <th>Quyền Hạn</th>
+                                <th>Tên Người Dùng</th>
+                                <th>Địa Chỉ</th>
+                                <th>Số Điện Thoại</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <form method="post">
+                                @foreach (var user in Model.User)
+                                {
+                                <tr>
+                                    <td>
+                                        <label class="checkboxs">
+                                            <input type="checkbox">
+                                            <span class="checkmarks"></span>
+                                        </label>
+                                    </td>
+                                    <td>@user.TenDangNhap</td>
+                                    <td>@user.MatKhau</td>
+                                    <td>@user.QuyenHan</td>
+                                    <td>@user.TenUser</td>
+                                    <td>@user.DiaChi</td>
+                                    <td>@user.SoDT</td>
+                                    <td>
+                                        <a class="me-3" href="CEUsers?TenDangNhap=@user.TenDangNhap&chucnang=edit">
+                                            <img src="~/assets/img/icons/edit.svg" alt="img">
+                                        </a>
+                                        <input type="hidden" name="TenDangNhap" value="@user.TenDangNhap" />
+                                        <button type="submit" class="btn btn-secondary btn-lg btn-block">
+                                            <img src="~/assets/img/icons/delete.svg" alt="img">
+                                        </button>
+                                    </td>
+                                </tr>
+                                }
+                            </form>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/assets/js/jquery-3.6.0.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var buttons = document.querySelectorAll(".btn-secondary");
+            buttons.forEach(function (button) {
+                button.addEventListener("click", function () {
+                    var TenDangNhap = this.parentElement.querySelector('input[name="TenDangNhap"]').value;
+                    // Chuyển hướng đến trang chọn ghế với mã chuyến xe làm tham số trong URL
+                    window.location.href = "QLUsers?TenDangNhap=" + TenDangNhap;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

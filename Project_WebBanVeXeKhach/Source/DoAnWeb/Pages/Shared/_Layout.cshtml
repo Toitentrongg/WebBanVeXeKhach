@@ -1,0 +1,150 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@using System.Security.Claims
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DoAnWeb</title>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="~/css/fontAwesome.css">
+    <link rel="stylesheet" href="~/css/hero-slider.css">
+    <link rel="stylesheet" href="~/css/owl-carousel.css">
+    <link rel="stylesheet" href="~/css/tooplate-style.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/DoAnWeb.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Layout/style.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav>
+            <div>
+                <img style="width: 150px;padding:10px" src="~/img/logo-XeKhach.png" alt="Flight Template" align="left">
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-3">
+                        <div style="height:70px" class="page-direction-button">
+                            <a asp-page="/Home"><i class="fa fa-home"></i>Home</a>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="page-direction-button">
+                            <a href="contact.html"><i class="fa fa-phone"></i>Contact Us Now</a>
+                        </div>
+                    </div>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        var user = HttpContextAccessor.HttpContext.User;
+                        var roleClaim = user.FindFirst(ClaimTypes.Role);    
+                        @if (@roleClaim.Value == "QuanTri")
+                        {
+                            <div style="text-align:right" class="col">
+                                <div class="action">
+                                    <div class="profile" onclick="menuToggle();">
+                                        <img src="~/img/user_profile.svg" />
+                                    </div>
+                                    <div class="menu">
+                                        <h3 style="color:black">Xin Chào @User.Identity.Name<br /><span style="color:black">Chức năng : @roleClaim.Value</h3>
+                                        <ul>
+                                            <li>
+                                                <img src="~/layoutimg/envelope.png" /><a href="/Admin/Homeadmin">Admin</a>
+                                            </li>
+                                            <li>
+                                                <img src="~/layoutimg/user.png" /><a href="/InfoUser">My profile</a>
+                                            </li>
+                                            <li>
+                                                <img src="~/layoutimg/edit.png" /><a href="/InforUser/chucnang=edit">Edit profile</a>
+                                            </li>
+                                            <li>
+                                                <img src="~/layoutimg/log-out.png" /><a href="#" onclick="logout()">Logout</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div style="text-align:right" class="col">
+                                <div class="action">
+                                    <div class="profile" onclick="menuToggle();">
+                                        <img src="~/img/user_profile.svg" />
+                                    </div>
+                                    <div class="menu">
+                                        <h3 style="color:black">Xin Chào @User.Identity.Name<br /><span style="color:black">Chức năng : @roleClaim.Value</h3>
+                                        <ul>
+                                            <li>
+                                                <img src="~/layoutimg/user.png" /><a href="/InfoUser">My profile</a>
+                                            </li>
+                                            <li>
+                                                <img src="~/layoutimg/edit.png" /><a href="/IforUser/chucnang=edit">Edit profile</a>
+                                            </li>
+                                            <li>
+                                                <img src="~/layoutimg/log-out.png" /><a href="#" onclick="logout()">Logout</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else{
+                        <div style="text-align:right" class="col">
+                            <div class="action">
+                                <!-- Đường dẫn tới trang Razor page login -->
+                                <a asp-page="/account/Login" style="width:150px;height:50px" class="btn btn-primary btn-lg">Đăng Nhập</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div>
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+    <footer style="background-color:#8860D0">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="primary-button">
+                        <a href="#" class="scroll-top">Back To Top</a>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <ul class="social-icons">
+                        <li><a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                        <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        function logout() {
+            // Xử lý đăng xuất ở đây
+            document.cookie = "CookiesLogin=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            window.location.href = "/Home"; // Chuyển hướng về trang chính
+        }
+    </script>
+    <script>
+        function menuToggle() {
+            const toggleMenu = document.querySelector(".menu");
+            toggleMenu.classList.toggle("active");
+        }
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
